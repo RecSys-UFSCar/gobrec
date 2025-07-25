@@ -15,3 +15,7 @@ PLOTS_AND_TABLES_SAVE_PATH = 'plots_and_tables'
 
 ITEM_ID_COLUMN = 'item_id'
 RATING_COLUMN = 'rating'
+
+TRAIN_TIME_COLUMN = 'train'
+RECS_TIME_COLUMN = 'recs'
+TOTAL_TIME_COLUMN = 'total'
