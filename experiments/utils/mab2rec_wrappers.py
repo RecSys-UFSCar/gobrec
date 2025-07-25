@@ -1,6 +1,6 @@
 
 from mab2rec import BanditRecommender, LearningPolicy
-from utils.constants import TOP_K, SEED, L2_LAMBDA, LINUCB_ALPHA, LINGREEDY_EPSILON, LINTS_ALPHA
+from utils.constants import TOP_K, SEED, L2_LAMBDA, LINUCB_ALPHA, LINGREEDY_EPSILON, LINTS_ALPHA, ITEM_ID_COLUMN, RATING_COLUMN
 from utils.BaseWrapper import BaseWrapper
 import pandas as pd
 import numpy as np
@@ -20,12 +20,12 @@ class BaseMab2recWrapper(BaseWrapper):
         Fit the MAB2Rec model to the interactions data.
         
         Parameters:
-            interactions_df (pd.DataFrame): DataFrame containing 'item_id' and 'reward'.
+            interactions_df (pd.DataFrame): DataFrame containing ITEM_ID_COLUMN and RATING_COLUMN.
             contexts (np.ndarray): Numpy array containing contexts for each interaction.
         """
         self.mab2rec_recommender.fit(
-            decisions=interactions_df['item_id'],
-            rewards=interactions_df['reward'],
+            decisions=interactions_df[ITEM_ID_COLUMN],
+            rewards=interactions_df[RATING_COLUMN],
             contexts=contexts
         )
     
@@ -34,12 +34,12 @@ class BaseMab2recWrapper(BaseWrapper):
         Incrementally fit the MAB2Rec model with new interactions data.
         
         Parameters:
-            interactions_df (pd.DataFrame): DataFrame containing 'item_id' and 'reward'.
+            interactions_df (pd.DataFrame): DataFrame containing ITEM_ID_COLUMN and RATING_COLUMN.
             contexts (np.ndarray): Numpy array containing contexts for each interaction.
         """
         self.mab2rec_recommender.partial_fit(
             decisions=interactions_df['item_id'],
-            rewards=interactions_df['reward'],
+            rewards=interactions_df[RATING_COLUMN],
             contexts=contexts
         )
     

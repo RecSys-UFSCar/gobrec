@@ -9,7 +9,7 @@ class BaseWrapper:
         Fit the model to the interactions data.
         
         Parameters:
-            interactions_df (pd.DataFrame): DataFrame containing 'item_id' and 'reward'.
+            interactions_df (pd.DataFrame): DataFrame containing ITEM_ID_COLUMN and RATING_COLUMN.
             contexts (np.ndarray): Numpy array containing contexts for each interaction.
         """
         raise NotImplementedError("This method should be implemented in subclasses.")
@@ -19,7 +19,7 @@ class BaseWrapper:
         Incrementally fit the model with new interactions data.
         
         Parameters:
-            interactions_df (pd.DataFrame): DataFrame containing 'item_id' and 'reward'.
+            interactions_df (pd.DataFrame): DataFrame containing ITEM_ID_COLUMN and RATING_COLUMN.
             contexts (np.ndarray): Numpy array containing contexts for each interaction.
         """
         raise NotImplementedError("This method should be implemented in subclasses.")

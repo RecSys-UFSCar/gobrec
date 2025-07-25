@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 import os
-from utils.constants import SEED
+from utils.constants import SEED, ITEM_ID_COLUMN, RATING_COLUMN
 
 def load_or_generate_toy_dataset(num_items: int, num_interactions: int, save_path: str) -> tuple:
     """
@@ -56,11 +56,11 @@ def generate_and_save_toy_dataset(num_items: int, num_interactions: int, save_pa
     # Generate interactions
     
     interactions = pd.DataFrame({
-        'item_id': np.concatenate([
+        ITEM_ID_COLUMN: np.concatenate([
             items,  # Ensure all items are included
             np.random.choice(items, size=num_interactions - len(items)),
         ]),
-        'rating': np.random.choice([0, 1], size=num_interactions, p=[0.7, 0.3])
+        RATING_COLUMN: np.random.choice([0, 1], size=num_interactions, p=[0.7, 0.3])
     })
     
     # Save interactions to CSV
