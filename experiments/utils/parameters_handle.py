@@ -15,7 +15,7 @@ def _display_options(options_table: pd.DataFrame, name_column: str):
     '''
     Printa as alternativas disponíveis para o usuário escolher
 
-    params:
+    Parameters:
         options_table: Tabela com as opções disponíveis (precisa ter a coluna name_column)
         name_column: Nome da coluna que contém o nome da opção
     '''
@@ -27,12 +27,12 @@ def ask_options(options_name: str, options_table: pd.DataFrame, name_column: str
     '''
     Pergunta e coleta as opções escolhidas pelo usuário.
 
-    params:
+    Parameters:
         options_name: Nome do que o usuário está escolhendo (ex: 'algorithm', 'dataset', etc.)
         options_table: Tabela com as opções disponíveis (precisa ter a coluna name_column). Cada linha da tabela é uma opção.
         name_column: Nome da coluna que contém o nome da opção
     
-    return:
+    Returns:
         Lista de inteiros com as opções escolhidas pelo usuário
     '''
     print('\nAvailable {}:\n'.format(options_name))
@@ -46,7 +46,7 @@ def get_input(description: str, inputs_info: 'list[InputInfo]') -> 'list[list[in
     '''
     Coleta as opções escolhidas pelo usuário (por meio do input ou comandos de linha)
 
-    params:
+    Parameters:
         description: Descrição da coleteta de opções
         inputs_info: Lista de dicionários com as seguintes informações:
             - name: Nome do que o usuário está escolhendo (ex: 'algorithm', 'dataset', etc.)
@@ -54,7 +54,7 @@ def get_input(description: str, inputs_info: 'list[InputInfo]') -> 'list[list[in
             - name_column: Nome da coluna que contém o nome
             - options: Tabela com as opções disponíveis (precisa ter a coluna name_column). Cada linha da tabela é uma opção.
 
-    return:
+    Returns:
         Lista de listas de inteiros, onde cada lista de inteiros representa as opções escolhidas pelo usuário para um InputInfo
     '''
     parser = argparse.ArgumentParser(description=description,
