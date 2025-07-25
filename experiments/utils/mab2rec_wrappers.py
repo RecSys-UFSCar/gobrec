@@ -1,11 +1,12 @@
 
 from mab2rec import BanditRecommender, LearningPolicy
 from utils.constants import TOP_K, SEED, L2_LAMBDA, LINUCB_ALPHA, LINGREEDY_EPSILON, LINTS_ALPHA
+from utils.BaseWrapper import BaseWrapper
 import pandas as pd
 import numpy as np
 
 
-class BaseMab2recWrapper:
+class BaseMab2recWrapper(BaseWrapper):
 
     def __init__(self):
         self.mab2rec_recommender = BanditRecommender(
