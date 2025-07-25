@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 import os
+from utils.constants import SEED
 
 def load_or_generate_toy_dataset(num_items: int, num_interactions: int, save_path: str) -> tuple:
     """
@@ -43,7 +44,7 @@ def generate_and_save_toy_dataset(num_items: int, num_interactions: int, save_pa
     """
     os.makedirs(save_path, exist_ok=True)  # Ensure the save directory exists
 
-    np.random.seed(42)  # For reproducibility
+    np.random.seed(SEED)  # For reproducibility
 
     # Generate item IDs
     items = []
