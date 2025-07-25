@@ -12,3 +12,6 @@ LINTS_ALPHA = 1.0
 TOY_DATASETS_SAVE_PATH = 'toy_datasets'
 RESULTS_SAVE_PATH = 'results'
 PLOTS_AND_TABLES_SAVE_PATH = 'plots_and_tables'
+
+ITEM_ID_COLUMN = 'item_id'
+RATING_COLUMN = 'rating'
