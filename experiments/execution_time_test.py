@@ -14,11 +14,9 @@ from time import time
 
 
 def execute_not_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd.DataFrame, contexts: np.ndarray, save_path: str):
-    num_necessary_executions = NUM_EXECUTIONS_PER_EXPERIMENT
     df_save_path = os.path.join(save_path, 'not_incremental.csv')
-    if os.path.exists(df_save_path):
-        num_necessary_executions -= pd.read_csv(os.path.join(save_path, 'not_incremental.csv')).shape[0]
-    
+    num_necessary_executions = get_num_necessary_executions(df_save_path)
+
     split_index = int(len(interactions_df) * 0.5)
 
     train_df = interactions_df.copy()[:split_index]
@@ -47,8 +45,61 @@ def execute_not_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd
         
 
 def execute_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd.DataFrame, contexts: np.ndarray, save_path: str):
-    pass 
+    NUM_WINDOWS = 10
+    df_save_path = os.path.join(save_path, 'incremental.csv')
+    num_necessary_executions = get_num_necessary_executions(df_save_path)
 
+    split_index = int(len(interactions_df) * 0.5)
+
+    train_df = interactions_df.copy()[:split_index]
+    test_df = interactions_df.copy()[split_index:]
+
+    train_contexts = contexts[:split_index]
+    test_contexts = contexts[split_index:]
+
+    results = {}
+
+    for _ in tqdm(range(num_necessary_executions), desc='Executing incremental experiment'):
+
+        results = {}
+
+        start_time = time()
+        wrapper.fit(train_df, train_contexts)
+        fit_time = time() - start_time
+        results[TRAIN_TIME_COLUMN] = fit_time
+
+        for window_number in range(NUM_WINDOWS):
+
+            current_window_start_index = int(len(test_df) * (window_number / NUM_WINDOWS))
+            current_window_end_index = int(len(test_df) * ((window_number + 1) / NUM_WINDOWS))
+
+            current_window_df = test_df.iloc[current_window_start_index:current_window_end_index]
+            current_window_contexts = test_contexts[current_window_start_index:current_window_end_index]
+
+            start_time = time()
+            wrapper.recommend(current_window_contexts)
+            recommend_time = time() - start_time
+            results[RECS_TIME_COLUMN + f'_{window_number+1}'] = recommend_time
+
+            if window_number != NUM_WINDOWS - 1:
+                start_time = time()
+                wrapper.partial_fit(current_window_df, current_window_contexts)
+                partial_fit_time = time() - start_time
+                results[TRAIN_TIME_COLUMN + f'_{window_number+1}'] = partial_fit_time
+
+        full_time = sum(results.values())
+        results[TOTAL_TIME_COLUMN] = full_time
+        
+        results_df = pd.DataFrame([results])
+        results_df.to_csv(df_save_path, mode='a', header=not os.path.exists(df_save_path), index=False)
+
+
+
+
+def get_num_necessary_executions(file_path: str):
+    if os.path.exists(file_path):
+        return NUM_EXECUTIONS_PER_EXPERIMENT - pd.read_csv(file_path).shape[0]
+    return NUM_EXECUTIONS_PER_EXPERIMENT
 
 def get_experiment_save_path(dataset_name, wrapper_name):
     save_path = os.path.join(RESULTS_SAVE_PATH, dataset_name, wrapper_name)
