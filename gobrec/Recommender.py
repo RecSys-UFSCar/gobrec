@@ -13,13 +13,13 @@ class Recommender:
     def fit(self, contexts: np.ndarray, items_ids: np.ndarray, rewards: np.ndarray):
         self.mab_algo.fit(contexts, items_ids, rewards)
     
-    def recommend(self, contexts: np.ndarray, items_ids_filter: list = None):
+    def recommend(self, contexts: np.ndarray, items_ids_filter: tuple[np.ndarray, np.ndarray] = None):
+        # ITEMS IDS FILTERS is a tuple where the first element is a list of indices (of contexts) to filter and the second element is the items_ids to filter
 
         expectations = self.mab_algo.predict(contexts)
 
-        items_ids_filter = self.mab_algo.label_encoder.transform(items_ids_filter) if items_ids_filter is not None else None
-
         if items_ids_filter is not None:
+            items_ids_filter[1] = self.mab_algo.label_encoder.transform(items_ids_filter[1])
             expectations[items_ids_filter] = -100.
 
         topk_sorted_expectations = torch.topk(expectations, self.top_k, dim=1)
