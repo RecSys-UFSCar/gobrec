@@ -14,7 +14,7 @@ class LinGreedy(Lin):
 
     def predict(self, contexts: np.ndarray):
 
-        x = torch.tensor(contexts, device=self.device)
+        x = torch.tensor(contexts, device=self.device, dtype=torch.double)
 
         num_arms = self.beta.shape[0]
         num_contexts = contexts.shape[0]

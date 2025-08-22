@@ -14,7 +14,7 @@ class LinUCB(Lin):
 
     def predict(self, contexts: np.ndarray):
 
-        x = torch.tensor(contexts, device=self.device)
+        x = torch.tensor(contexts, device=self.device, dtype=torch.double)
 
         scores = torch.matmul(x, self.beta.T)
 
