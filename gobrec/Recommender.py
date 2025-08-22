@@ -1,5 +1,5 @@
 
-from gobrec.gobrec.lin_mabs.Lin import Lin
+from gobrec.lin_mabs.Lin import Lin
 import numpy as np
 import torch
 
@@ -13,7 +13,7 @@ class Recommender:
     def fit(self, contexts: np.ndarray, items_ids: np.ndarray, rewards: np.ndarray):
         self.mab_algo.fit(contexts, items_ids, rewards)
     
-    def recommend(self, contexts: np.ndarray, items_ids_filter: tuple[np.ndarray, np.ndarray] = None):
+    def recommend(self, contexts: np.ndarray, items_ids_filter: 'tuple[np.ndarray, np.ndarray]' = None):
         # ITEMS IDS FILTERS is a tuple where the first element is a list of indices (of contexts) to filter and the second element is the items_ids to filter
 
         expectations = self.mab_algo.predict(contexts)
