@@ -6,9 +6,9 @@ import torch
 
 class LinUCB(Lin):
 
-    def __init__(self, seed: int = None, alpha: float = 1.0, l2_lambda: float = 1.0, use_gpu: bool = False):
+    def __init__(self, seed: int = None, alpha: float = 1.0, l2_lambda: float = 1.0, use_gpu: bool = False, items_per_batch: int = 10_000):
         
-        super().__init__(seed, l2_lambda, use_gpu)
+        super().__init__(seed, l2_lambda, use_gpu, items_per_batch)
         self.alpha = alpha
 
 

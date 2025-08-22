@@ -7,14 +7,14 @@ from gobrec.mabs.MABAlgo import MABAlgo
 
 class Lin(MABAlgo):
 
-    def __init__(self, seed: int = None, l2_lambda: float = 1.0, use_gpu: bool = False):
+    def __init__(self, seed: int = None, l2_lambda: float = 1.0, use_gpu: bool = False, items_per_batch: int = 10_000):
         
         super().__init__(seed)
 
         self.l2_lambda = l2_lambda
         self.device = 'cuda' if use_gpu else 'cpu'
 
-        self.items_per_batch = 1000
+        self.items_per_batch = items_per_batch
         self.already_initialized = False
     
     def _update_label_encoder_and_matrices_sizes(self, items_ids: np.ndarray, num_features: int):
@@ -59,4 +59,9 @@ class Lin(MABAlgo):
             )
 
     def predict(self, contexts: np.ndarray):
-        return torch.matmul(torch.tensor(contexts, device=self.device, dtype=torch.double), self.beta.T)
+        scores = torch.empty((contexts.shape[0], self.num_arms), device=self.device, dtype=torch.double)
+        for start in range(0, self.num_arms, self.items_per_batch):
+            end = min(start + self.items_per_batch, self.num_arms)  
+            scores[:, start:end] = torch.einsum('bd,ad->ba', torch.tensor(contexts, device=self.device, dtype=torch.double), self.beta[start:end])
+        
+        return scores

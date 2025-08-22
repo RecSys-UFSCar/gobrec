@@ -33,6 +33,7 @@ class MABAlgo(ABC):
         
         if self.num_features is None:
             self.num_features = num_features
+        
         assert num_features == self.num_features, "Number of features has changed!"
         
 
