@@ -23,7 +23,7 @@ class Recommender:
             expectations[items_ids_filter] = -100.
 
         topk_sorted_expectations = torch.topk(expectations, self.top_k, dim=1)
-        recommendations = self.mab_algo.label_encoder.inverse_transform(topk_sorted_expectations.indices.cpu().numpy())
+        recommendations = self.mab_algo.label_encoder.inverse_transform(topk_sorted_expectations.indices.cpu().numpy().flatten()).reshape(contexts.shape[0], self.top_k)
         scores = topk_sorted_expectations.values.cpu().numpy()
         
         return recommendations, scores
