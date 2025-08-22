@@ -1,5 +1,5 @@
 
-from gobrec.lin_mabs.Lin import Lin
+from gobrec.mabs.lin_mabs.Lin import Lin
 import numpy as np
 import torch
 
