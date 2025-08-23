@@ -1,7 +1,7 @@
 
 from utils.datasets import DATASETS_TABLE
 from utils.wrappers_table import WRAPPERS_TABLE
-from utils.constants import RESULTS_SAVE_PATH, NUM_EXECUTIONS_PER_EXPERIMENT, TRAIN_TIME_COLUMN, RECS_TIME_COLUMN, TOTAL_TIME_COLUMN
+from utils.constants import RESULTS_SAVE_PATH, NUM_EXECUTIONS_PER_EXPERIMENT, TRAIN_TIME_COLUMN, RECS_TIME_COLUMN, TOTAL_TIME_COLUMN, CONTEXTS_PER_BATCH
 from utils.parameters_handle import get_input
 from utils.BaseWrapper import BaseWrapper
 
@@ -26,11 +26,13 @@ def execute_not_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd
     
     for _ in tqdm(range(num_necessary_executions), desc='Executing not incremental experiment'):
         start_time = time()
-        wrapper.fit(train_df, train_contexts)
+        for start in range(0, len(train_contexts), CONTEXTS_PER_BATCH):
+            wrapper.fit(train_df[start:start+CONTEXTS_PER_BATCH], train_contexts[start:start+CONTEXTS_PER_BATCH])
         fit_time = time() - start_time
 
         start_time = time()
-        wrapper.recommend(test_contexts)
+        for start in range(0, len(test_contexts), CONTEXTS_PER_BATCH):
+            wrapper.recommend(test_contexts[start:start+CONTEXTS_PER_BATCH])
         recommend_time = time() - start_time
 
         full_time = fit_time + recommend_time
@@ -64,7 +66,9 @@ def execute_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd.Dat
         results = {}
 
         start_time = time()
-        wrapper.fit(train_df, train_contexts)
+        
+        for start in range(0, len(train_contexts), CONTEXTS_PER_BATCH):
+            wrapper.fit(train_df[start:start+CONTEXTS_PER_BATCH], train_contexts[start:start+CONTEXTS_PER_BATCH])
         fit_time = time() - start_time
         results[TRAIN_TIME_COLUMN] = fit_time
 
@@ -77,13 +81,15 @@ def execute_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd.Dat
             current_window_contexts = test_contexts[current_window_start_index:current_window_end_index]
 
             start_time = time()
-            wrapper.recommend(current_window_contexts)
+            for start in range(0, len(current_window_contexts), CONTEXTS_PER_BATCH):
+                wrapper.recommend(current_window_contexts[start:start+CONTEXTS_PER_BATCH])
             recommend_time = time() - start_time
             results[RECS_TIME_COLUMN + f'_{window_number+1}'] = recommend_time
 
             if window_number != NUM_WINDOWS - 1:
                 start_time = time()
-                wrapper.partial_fit(current_window_df, current_window_contexts)
+                for start in range(0, len(current_window_df), CONTEXTS_PER_BATCH):
+                    wrapper.partial_fit(current_window_df[start:start+CONTEXTS_PER_BATCH], current_window_contexts[start:start+CONTEXTS_PER_BATCH])
                 partial_fit_time = time() - start_time
                 results[TRAIN_TIME_COLUMN + f'_{window_number+1}'] = partial_fit_time
 

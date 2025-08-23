@@ -12,7 +12,8 @@ class BaseMab2recWrapper(BaseWrapper):
         self.mab2rec_recommender = BanditRecommender(
             learning_policy=self.mab2rec_learning_policy,  # This should be set in the subclass
             top_k=TOP_K,
-            seed=SEED
+            seed=SEED,
+            n_jobs=-1
         )
     
     def fit(self, interactions_df: pd.DataFrame, contexts: np.ndarray):
