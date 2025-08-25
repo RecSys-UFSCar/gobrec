@@ -25,6 +25,7 @@ class Lin(MABAlgo):
             self.Xty = torch.zeros((self.num_arms, self.num_features), device=self.device, dtype=torch.double)
             self.A = torch.eye(self.num_features, device=self.device, dtype=torch.double).unsqueeze(0).repeat(self.num_arms, 1, 1) * self.l2_lambda
             self.beta = torch.zeros((self.num_arms, self.num_features), device=self.device, dtype=torch.double)
+            self.already_initialized = True
         elif self.num_arms != self.beta.shape[0]:
             # the number of arms has changed, we need to update the matrices
             Xty_new = torch.zeros((self.num_arms, self.num_features), device=self.device, dtype=torch.double)
