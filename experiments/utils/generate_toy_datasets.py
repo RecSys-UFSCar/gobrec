@@ -57,8 +57,7 @@ def generate_and_save_toy_dataset(num_items: int, num_interactions: int, save_pa
     
     interactions = pd.DataFrame({
         ITEM_ID_COLUMN: np.concatenate([
-            items,  # Ensure all items are included
-            np.random.choice(items, size=num_interactions - len(items)),
+            np.random.choice(items, size=num_interactions),
         ]),
         RATING_COLUMN: np.random.choice([0, 1], size=num_interactions, p=[0.7, 0.3])
     })
