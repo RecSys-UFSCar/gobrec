@@ -1,7 +1,6 @@
 
 import torch
 import numpy as np
-from sklearn.preprocessing import LabelEncoder
 from gobrec.mabs.MABAlgo import MABAlgo
 
 
@@ -17,9 +16,9 @@ class Lin(MABAlgo):
         self.items_per_batch = items_per_batch
         self.already_initialized = False
     
-    def _update_label_encoder_and_matrices_sizes(self, items_ids: np.ndarray, num_features: int):
+    def _update_label_encoder_and_matrices_sizes(self, decisions: np.ndarray, num_features: int):
 
-        self._update_label_encoder(items_ids, num_features)
+        self._update_label_encoder(decisions, num_features)
 
         if not self.already_initialized:
             self.Xty = torch.zeros((self.num_arms, self.num_features), device=self.device, dtype=torch.double)
@@ -41,13 +40,13 @@ class Lin(MABAlgo):
             self.beta = beta_new
 
 
-    def fit(self, contexts: np.ndarray, items_ids: np.ndarray, rewards: np.ndarray):
+    def fit(self, contexts: np.ndarray, decisions: np.ndarray, rewards: np.ndarray):
 
-        self._update_label_encoder_and_matrices_sizes(items_ids, contexts.shape[1])
+        self._update_label_encoder_and_matrices_sizes(decisions, contexts.shape[1])
 
         X_device = torch.tensor(contexts, device=self.device, dtype=torch.double)
         y_device = torch.tensor(rewards, device=self.device, dtype=torch.double)
-        decisions_device = torch.tensor(self.label_encoder.transform(items_ids), device=self.device, dtype=torch.long)
+        decisions_device = torch.tensor(self.label_encoder.transform(decisions), device=self.device, dtype=torch.long)
 
         self.A.index_add_(0, decisions_device, torch.einsum('ni,nj->nij', X_device, X_device))
 
