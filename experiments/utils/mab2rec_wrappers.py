@@ -41,12 +41,12 @@ class BaseMab2recWrapper(BaseWrapper):
             interactions_df (pd.DataFrame): DataFrame containing ITEM_ID_COLUMN and RATING_COLUMN.
             contexts (np.ndarray): Numpy array containing contexts for each interaction.
         """
-        new_arms = np.setdiff1d(interactions_df['item_id'].unique(), self.mab2rec_recommender.mab._imp.arms)
+        new_arms = np.setdiff1d(interactions_df[ITEM_ID_COLUMN].unique(), self.mab2rec_recommender.mab._imp.arms)
         for new_arm in new_arms:
             self.mab2rec_recommender.add_arm(new_arm)
         
         self.mab2rec_recommender.partial_fit(
-            decisions=interactions_df['item_id'],
+            decisions=interactions_df[ITEM_ID_COLUMN],
             rewards=interactions_df[RATING_COLUMN],
             contexts=contexts
         )
