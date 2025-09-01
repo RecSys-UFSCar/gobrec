@@ -10,8 +10,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'torch',
-        'numpy',
-        'scikit-learn'
+        'numpy'
     ],
     long_description=description,
     long_description_content_type='text/markdown'
