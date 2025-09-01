@@ -1,7 +1,29 @@
 
 from abc import ABC, abstractmethod
 import numpy as np
-from sklearn.preprocessing import LabelEncoder
+
+
+class LabelEncoder:
+    def __init__(self):
+        self.class_to_index: dict[int, int] = {}
+        self.index_to_class: list[int] = []
+
+    def fit(self, decisions: np.ndarray):
+        for cls in decisions:
+            if cls not in self.class_to_index:
+                idx = len(self.index_to_class)
+                self.class_to_index[cls] = idx
+                self.index_to_class.append(cls)
+
+    def transform(self, decisions: np.ndarray) -> np.ndarray:
+        return np.array([self.class_to_index[cls] for cls in decisions])
+
+    def inverse_transform(self, indices: np.ndarray) -> np.ndarray:
+        return np.array([self.index_to_class[idx] for idx in indices])
+
+    @property
+    def classes_(self):
+        return np.array(self.index_to_class)
 
 
 class MABAlgo(ABC):
