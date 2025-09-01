@@ -27,7 +27,10 @@ def execute_not_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd
     for _ in tqdm(range(num_necessary_executions), desc='Executing not incremental experiment'):
         start_time = time()
         for start in range(0, len(train_contexts), CONTEXTS_PER_BATCH):
-            wrapper.fit(train_df[start:start+CONTEXTS_PER_BATCH], train_contexts[start:start+CONTEXTS_PER_BATCH])
+            if start == 0:
+                wrapper.fit(train_df[start:start+CONTEXTS_PER_BATCH], train_contexts[start:start+CONTEXTS_PER_BATCH])
+            else:
+                wrapper.partial_fit(train_df[start:start+CONTEXTS_PER_BATCH], train_contexts[start:start+CONTEXTS_PER_BATCH])
         fit_time = time() - start_time
 
         start_time = time()
@@ -44,6 +47,8 @@ def execute_not_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd
         }
         results_df = pd.DataFrame([results])
         results_df.to_csv(df_save_path, mode='a', header=not os.path.exists(df_save_path), index=False)
+
+        wrapper.reset()
         
 
 def execute_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd.DataFrame, contexts: np.ndarray, save_path: str):
@@ -68,7 +73,10 @@ def execute_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd.Dat
         start_time = time()
         
         for start in range(0, len(train_contexts), CONTEXTS_PER_BATCH):
-            wrapper.fit(train_df[start:start+CONTEXTS_PER_BATCH], train_contexts[start:start+CONTEXTS_PER_BATCH])
+            if start == 0:
+                wrapper.fit(train_df[start:start+CONTEXTS_PER_BATCH], train_contexts[start:start+CONTEXTS_PER_BATCH])
+            else:
+                wrapper.partial_fit(train_df[start:start+CONTEXTS_PER_BATCH], train_contexts[start:start+CONTEXTS_PER_BATCH])
         fit_time = time() - start_time
         results[TRAIN_TIME_COLUMN] = fit_time
 
@@ -99,6 +107,7 @@ def execute_incremental_experiment(wrapper: BaseWrapper, interactions_df: pd.Dat
         results_df = pd.DataFrame([results])
         results_df.to_csv(df_save_path, mode='a', header=not os.path.exists(df_save_path), index=False)
 
+        wrapper.reset()
 
 
 
