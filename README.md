@@ -7,17 +7,24 @@ GOBRec: GPU Optimized Bandits Recommender
 
 ```python
 import numpy as np
-from gobrec.mabs.lin_mabs import LinUCB                 # Import LinUCB as an example, it could be also LinTS or LinGreedy
+# Import LinUCB as an example, it could be also LinTS or LinGreedy
+from gobrec.mabs.lin_mabs import LinUCB
 
-contexts = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])  # A batch of contexts for training.
-decisions = np.array(['a', 1, 2])                       # Corresponding decisions taken, it can be str or int
-rewards = np.array([1, 0, 1])                           # Corresponding rewards received
+# A batch of contexts for training
+contexts = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+# Corresponding decisions (items) taken, it can be str or int
+decisions = np.array(['a', 1, 2])
+# Corresponding rewards (ratings) received                     
+rewards = np.array([1, 0, 1])
 
-bandit = LinUCB(seed=42, use_gpu=True)                  # Initialize the bandit. A seed is set for reproducibility and GPU usage can be on or off
+# Initialize the bandit. A seed is set for reproducibility and GPU usage can be switched
+bandit = LinUCB(seed=42, use_gpu=True)
 
-bandit.fit(contexts, decisions, rewards)                # Fit the model with the training data
+# Fit the model with the training data
+bandit.fit(contexts, decisions, rewards)
 
-bandit.predict(np.array([[1, 1, 0], [0, 1, 1]]))        # Predict scores for each arm (item) given a batch of contexts
+# Predict scores for each arm (item) given a batch of contexts
+bandit.predict(np.array([[1, 1, 0], [0, 1, 1]]))
 ```
 
 ### Using a MAB Algorithm to generate recommendations
@@ -25,18 +32,26 @@ bandit.predict(np.array([[1, 1, 0], [0, 1, 1]]))        # Predict scores for eac
 ```python
 import numpy as np
 import gobrec
-from gobrec.mabs.lin_mabs import LinUCB                 # Import LinUCB as an example, it could be also LinTS or LinGreedy
+# Import LinUCB as an example, it could be also LinTS or LinGreedy
+from gobrec.mabs.lin_mabs import LinUCB
 
-contexts = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])  # A batch of contexts for training.
-decisions = np.array(['a', 1, 2])                       # Corresponding decisions taken, it can be str or int
-rewards = np.array([1, 0, 1])                           # Corresponding rewards received
+# A batch of contexts for training.
+contexts = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+# Corresponding decisions (items) taken, it can be str or int
+decisions = np.array(['a', 1, 2])
+# Corresponding rewards (ratings) received
+rewards = np.array([1, 0, 1])
 
 recommender = gobrec.Recommender(
-    mab_algo=LinUCB(seed=42, use_gpu=True),             # The recommender can use any implementation following the MABAlgo interface
-    top_k=2                                             # Number of items to recommend
+    # The recommender can use any implementation following the MABAlgo interface
+    mab_algo=LinUCB(seed=42, use_gpu=True),
+    # Number of items to recommend
+    top_k=2
 )
 
-recommender.fit(contexts, decisions, rewards)           # Fit the model with the training data
+# Fit the model with the training data
+recommender.fit(contexts, decisions, rewards)
 
-recommender.recommend(np.array([[1, 1, 0], [0, 1, 1]])) # Recommend top_k items given a batch of contexts
+# Recommend top_k items given a batch of contexts
+recommender.recommend(np.array([[1, 1, 0], [0, 1, 1]]))
 ```
