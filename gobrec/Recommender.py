@@ -1,12 +1,12 @@
 
-from gobrec.mabs.lin_mabs.Lin import Lin
+from gobrec.mabs.MABAlgo import MABAlgo
 import numpy as np
 import torch
 
 
 class Recommender:
 
-    def __init__(self, mab_algo: Lin, top_k: int):
+    def __init__(self, mab_algo: MABAlgo, top_k: int):
         self.mab_algo = mab_algo
         self.top_k = top_k
     
@@ -27,3 +27,6 @@ class Recommender:
         scores = topk_sorted_expectations.values.cpu().numpy()
         
         return recommendations, scores
+
+    def reset(self):
+        self.mab_algo.reset()

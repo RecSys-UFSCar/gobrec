@@ -14,3 +14,6 @@ class RandomMAB(MABAlgo):
 
     def predict(self, contexts: np.ndarray):
         return torch.from_numpy(self.rng.random((contexts.shape[0], self.num_arms))).double()
+    
+    def reset(self):
+        super().reset()

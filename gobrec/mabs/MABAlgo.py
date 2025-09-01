@@ -50,3 +50,13 @@ class MABAlgo(ABC):
         Predict the expected rewards for the given contexts.
         """
         pass
+
+    @abstractmethod
+    def reset(self):
+        """
+        Reset the MAB algorithm to its initial state.
+        """
+        self.label_encoder = None
+        self.num_arms = None
+        self.num_features = None
+        self.rng = np.random.default_rng(self.seed)

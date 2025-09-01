@@ -65,3 +65,13 @@ class Lin(MABAlgo):
             scores[:, start:end] = torch.einsum('bd,ad->ba', torch.tensor(contexts, device=self.device, dtype=torch.double), self.beta[start:end])
         
         return scores
+
+    def reset(self):
+        '''
+        Reset the linear model to its initial state.
+        '''
+        super().reset()
+        self.already_initialized = False
+        self.Xty = None
+        self.A = None
+        self.beta = None
