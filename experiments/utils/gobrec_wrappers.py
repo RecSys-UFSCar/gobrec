@@ -4,6 +4,7 @@ from utils.constants import TOP_K, SEED, L2_LAMBDA, LINUCB_ALPHA, LINGREEDY_EPSI
 from utils.BaseWrapper import BaseWrapper
 import pandas as pd
 import numpy as np
+from gobrec.Recommender import Recommender
 
 
 class BaseGobrecWrapper(BaseWrapper):
@@ -53,7 +54,21 @@ class BaseGobrecWrapper(BaseWrapper):
             list: List of recommended item IDs.
         """
         return self.gobrec_recommender.recommend(contexts=contexts)
-        
+    
+    def reset(self):
+        """
+        Reset the GOBRec model to its initial state.
+        """
+        self.gobrec_recommender.reset()
+
+
+class LinGobrecWrapper(BaseGobrecWrapper):
+    """
+    Wrapper for the LinUCB algorithm in GOBRec.
+    """
+    def __init__(self):
+        self.mab_algo = gobrec.mabs.lin_mabs.Lin(l2_lambda=L2_LAMBDA, use_gpu=False)
+        super().__init__()
 
 class LinUCBGobrecWrapperCPU(BaseGobrecWrapper):
     """
@@ -85,7 +100,7 @@ class LinUCBGobrecWrapperGPU(BaseGobrecWrapper):
     Wrapper for the LinUCB algorithm in GOBRec.
     """
     def __init__(self):
-        self.mab_algo = gobrec.mabs.lin_mabs.LinUCB(l2_lambda=L2_LAMBDA, alpha=LINUCB_ALPHA, use_gpu=True)
+        self.mab_algo = gobrec.mabs.lin_mabs.LinUCB(l2_lambda=L2_LAMBDA, alpha=LINUCB_ALPHA, use_gpu=True, items_per_batch=5_000)
         super().__init__()
 
 class LinGreedyGobrecWrapperGPU(BaseGobrecWrapper):
@@ -93,7 +108,7 @@ class LinGreedyGobrecWrapperGPU(BaseGobrecWrapper):
     Wrapper for the LinGreedy algorithm in GOBRec.
     """
     def __init__(self):
-        self.mab_algo = gobrec.mabs.lin_mabs.LinGreedy(l2_lambda=L2_LAMBDA, epsilon=LINGREEDY_EPSILON, use_gpu=True)
+        self.mab_algo = gobrec.mabs.lin_mabs.LinGreedy(l2_lambda=L2_LAMBDA, epsilon=LINGREEDY_EPSILON, use_gpu=True, items_per_batch=10_000)
         super().__init__()
 
 class LinTSGobrecWrapperGPU(BaseGobrecWrapper):
@@ -101,5 +116,5 @@ class LinTSGobrecWrapperGPU(BaseGobrecWrapper):
     Wrapper for the LinGreedy algorithm in GOBRec.
     """
     def __init__(self):
-        self.mab_algo = gobrec.mabs.lin_mabs.LinTS(l2_lambda=L2_LAMBDA, alpha=LINTS_ALPHA, use_gpu=True)
+        self.mab_algo = gobrec.mabs.lin_mabs.LinTS(l2_lambda=L2_LAMBDA, alpha=LINTS_ALPHA, use_gpu=True, items_per_batch=3_000)
         super().__init__()

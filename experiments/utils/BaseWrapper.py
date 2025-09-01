@@ -35,3 +35,9 @@ class BaseWrapper:
             list: List of recommended item IDs.
         """
         raise NotImplementedError("This method should be implemented in subclasses.")
+    
+    def reset(self):
+        """
+        Reset the model to its initial state.
+        """
+        raise NotImplementedError("This method should be implemented in subclasses.")

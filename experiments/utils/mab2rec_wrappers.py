@@ -9,6 +9,9 @@ import numpy as np
 class BaseMab2recWrapper(BaseWrapper):
 
     def __init__(self):
+        self._init()
+    
+    def _init(self):
         self.mab2rec_recommender = BanditRecommender(
             learning_policy=self.mab2rec_learning_policy,  # This should be set in the subclass
             top_k=TOP_K,
@@ -38,6 +41,10 @@ class BaseMab2recWrapper(BaseWrapper):
             interactions_df (pd.DataFrame): DataFrame containing ITEM_ID_COLUMN and RATING_COLUMN.
             contexts (np.ndarray): Numpy array containing contexts for each interaction.
         """
+        new_arms = np.setdiff1d(interactions_df['item_id'].unique(), self.mab2rec_recommender.mab._imp.arms)
+        for new_arm in new_arms:
+            self.mab2rec_recommender.add_arm(new_arm)
+        
         self.mab2rec_recommender.partial_fit(
             decisions=interactions_df['item_id'],
             rewards=interactions_df[RATING_COLUMN],
@@ -54,8 +61,22 @@ class BaseMab2recWrapper(BaseWrapper):
         Returns:
             list: List of recommended item IDs.
         """
-        return self.mab2rec_recommender.recommend(contexts=contexts)
-        
+        return self.mab2rec_recommender.recommend(contexts=contexts, return_scores=True, apply_sigmoid=False)
+
+    def reset(self):
+        """
+        Reset the MAB2Rec model to its initial state.
+        """
+        self._init()
+
+
+class LinMab2RecWrapper(BaseMab2recWrapper):
+    """
+    Wrapper for the LinUCB algorithm in MAB2Rec.
+    """
+    def __init__(self):
+        self.mab2rec_learning_policy = LearningPolicy.LinGreedy(l2_lambda=L2_LAMBDA, epsilon=0)
+        super().__init__()
 
 class LinUCBMab2RecWrapper(BaseMab2recWrapper):
     """
