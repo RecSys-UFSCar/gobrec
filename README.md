@@ -55,3 +55,14 @@ recommender.fit(contexts, decisions, rewards)
 # Recommend top_k items given a batch of contexts
 recommender.recommend(np.array([[1, 1, 0], [0, 1, 1]]))
 ```
+
+
+## Documentation
+
+```bash
+sphinx-apidoc -o docs ./gobrec
+```
+
+```bash
+make html
+```
