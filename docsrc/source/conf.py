@@ -40,6 +40,9 @@ html_theme_options = {
 }
 html_baseurl = "https://recsys-ufscar.github.io/gobrec/"
 html_static_path = ['_static']
+html_css_files = []
+html_js_files = []
+html_use_relative_paths = True  # <--- ADD THIS
 
 html_theme_options = {
     "navigation_with_keys": True,
