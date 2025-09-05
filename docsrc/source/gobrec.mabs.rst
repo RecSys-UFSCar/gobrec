@@ -12,18 +12,18 @@ Subpackages
 Submodules
 ----------
 
-gobrec.mabs.MABAlgo module
---------------------------
+gobrec.mabs.mab\_algo module
+----------------------------
 
-.. automodule:: gobrec.mabs.MABAlgo
+.. automodule:: gobrec.mabs.mab_algo
    :members:
    :undoc-members:
    :show-inheritance:
 
-gobrec.mabs.RandomMAB module
-----------------------------
+gobrec.mabs.random\_mab module
+------------------------------
 
-.. automodule:: gobrec.mabs.RandomMAB
+.. automodule:: gobrec.mabs.random_mab
    :members:
    :undoc-members:
    :show-inheritance:

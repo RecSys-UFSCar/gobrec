@@ -12,18 +12,10 @@ Subpackages
 Submodules
 ----------
 
-gobrec.Recommender module
+gobrec.recommender module
 -------------------------
 
-.. automodule:: gobrec.Recommender
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-gobrec.example module
----------------------
-
-.. automodule:: gobrec.example
+.. automodule:: gobrec.recommender
    :members:
    :undoc-members:
    :show-inheritance:

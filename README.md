@@ -60,7 +60,7 @@ recommender.recommend(np.array([[1, 1, 0], [0, 1, 1]]))
 ## Documentation
 
 ```bash
-sphinx-apidoc -o docs ./gobrec
+sphinx-apidoc -o docsrc ./gobrec
 ```
 
 ```bash

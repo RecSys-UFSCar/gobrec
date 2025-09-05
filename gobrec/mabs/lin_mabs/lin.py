@@ -1,7 +1,7 @@
 
 import torch
 import numpy as np
-from gobrec.mabs.MABAlgo import MABAlgo
+from gobrec.mabs.mab_algo import MABAlgo
 
 
 class Lin(MABAlgo):

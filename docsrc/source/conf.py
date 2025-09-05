@@ -19,11 +19,19 @@ release = '0.4.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    "sphinx.ext.autodoc",   # needed for autodoc directives
-    "sphinx.ext.napoleon",  # optional, works with numpydoc too
-    "sphinx.ext.viewcode",  # optional, adds source code links
-    "numpydoc",             # the numpydoc extension
+    "sphinx.ext.autodoc",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.intersphinx",
+    "numpydoc"
 ]
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "torch": ("https://pytorch.org/docs/stable/", None),
+}
+numpydoc_show_class_members = True
+numpydoc_class_members_toctree = False
 
 templates_path = ['_templates']
 exclude_patterns = []
@@ -40,9 +48,6 @@ html_theme_options = {
 }
 html_baseurl = "https://recsys-ufscar.github.io/gobrec/"
 html_static_path = ['_static']
-html_css_files = []
-html_js_files = []
-html_use_relative_paths = True
 html_theme_options = {
     "navigation_with_keys": True,
 }
@@ -56,6 +61,7 @@ html_context = {
 }
 
 
+# Adds .nojekyll file to the output to avoid GitHub Pages ignoring files and folders that start with an underscore
 
 def setup(app):
     app.connect("build-finished", create_nojekyll)
