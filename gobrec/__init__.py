@@ -1,3 +1,3 @@
 
-from gobrec.Recommender import Recommender
+from gobrec.recommender import Recommender
 import gobrec.mabs
