@@ -1,0 +1,14 @@
+[tool.ruff]
+# Apply to all Python files
+target-version = "py311"
+
+[tool.ruff.lint]
+# Enable docstring rules (Dxxx = pydocstyle)
+select = ["D"]
+
+# Ignore rules you don't want (example: allow missing __init__ docstrings)
+ignore = ["D107"]
+
+# Enforce NumPy-style docstrings
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
