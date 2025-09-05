@@ -38,4 +38,17 @@ html_theme_options = {
     "show_nav_level": 2,
     "navbar_end": ["search-field.html", "navbar-icon-links.html"],
 }
+html_baseurl = "https://recsys-ufscar.github.io/gobrec/"
 html_static_path = ['_static']
+
+html_theme_options = {
+    "navigation_with_keys": True,
+}
+
+html_context = {
+    "display_github": True,
+    "github_user": "recsys-ufscar",
+    "github_repo": "gobrec",
+    "github_version": "main",
+    "conf_py_path": "/docs/",
+}
