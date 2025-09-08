@@ -106,10 +106,40 @@ class Recommender:
         self.mab_algo.fit(contexts, decisions, rewards)
     
     def recommend(self, contexts: np.ndarray, decisions_filter: 'list[np.ndarray, np.ndarray]' = None):
-        """
-        """
-        # ITEMS IDS FILTERS is a tuple where the first element is a list of indices (of contexts) to filter and the second element is the items_ids to filter
+        """Predicts top-K recommendations for the given contexts.
 
+        Parameters
+        ----------
+        contexts : np.ndarray
+            A 2D array where each row represents the context features for which
+            recommendations are to be made.
+        decisions_filter : list[np.ndarray, np.ndarray], optional
+            A list containing two arrays:
+
+            1. `contexts_indexes`: A 1D array of indices representing the contexts 
+            for which certain items should be filtered out.
+            2. `items_ids`: A 1D array of item IDs to be filtered out for 
+            the corresponding contexts.
+
+            For example, if `contexts_indexes` is `[0, 2]` and `items_ids` is
+            `['itemA', 'itemB']`, then 'itemA' will be filtered out from the 
+            recommendations for the context at index 0, and 'itemB' will be filtered 
+            out for the context at index 2. `contexts_indexes` can contain repeated
+            indices if multiple items need to be filtered for the same context.
+
+            If `decisions_filter` is `None`, no items will be filtered from the
+            recommendations.
+        
+        Returns
+        -------
+        recommendations : np.ndarray
+            A 2D array where each row contains the top-K recommended item IDs for 
+            the corresponding context.
+        scores : np.ndarray
+            A 2D array where each row contains the scores of the top-K recommended
+            items for the corresponding context.
+
+        """
         expectations = self.mab_algo.predict(contexts)
 
         if decisions_filter is not None:
@@ -123,6 +153,11 @@ class Recommender:
         return recommendations, scores
 
     def reset(self):
-        """
+        """Reset the internal state of the MAB algorithm.
+
+        This method is useful when you want to clear the learned parameters
+        of the MAB algorithm and start fresh without any prior knowledge.
+
+        This will make the recommender behave as if it was just initialized.
         """
         self.mab_algo.reset()
