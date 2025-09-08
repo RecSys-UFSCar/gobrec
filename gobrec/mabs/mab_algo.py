@@ -6,6 +6,7 @@ recommender system. It also includes a label encoder to handle item IDs.
 from abc import ABC, abstractmethod
 import numpy as np
 from typing import Union
+import torch
 
 
 class _LabelEncoder:
@@ -163,7 +164,7 @@ class MABAlgo(ABC):
         pass
 
     @abstractmethod
-    def predict(self, contexts: np.ndarray) -> np.ndarray:
+    def predict(self, contexts: np.ndarray) -> torch.Tensor:
         """Predict the expected rewards for the given contexts.
 
         Parameters
@@ -173,8 +174,8 @@ class MABAlgo(ABC):
         
         Returns
         -------
-        expected_rewards : np.ndarray
-            A 2D array of shape (n_samples, n_arms) representing the expected
+        expected_rewards : torch.Tensor
+            A 2D tensor of shape (n_samples, n_arms) representing the expected
             rewards for each arm (item) given the contexts. The encoded items
             ids are used here. To get the original item IDs, it is possible to
             use the `label_encoder.inverse_transform` method.
