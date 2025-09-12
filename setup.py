@@ -6,7 +6,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='gobrec',
-    version='0.4.0',
+    version='0.5.0',
     packages=find_packages(),
     install_requires=[
         'torch',
