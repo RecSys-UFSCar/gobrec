@@ -1,7 +1,20 @@
-# gobrec
-GOBRec: GPU Optimized Bandits Recommender
+# GOBRec: GPU Optimized Bandits Recommender
+
+## Installation
+
+INSTALACAO COM O PIP INSTALL.
+FALAR SOBRE CUDA E TORCH PARA PODER USAR A OTIMIZACAO DE GPU
+LINK PARA MAIS DETALHES NA DOCUMENTACAO
+
+## Performance comparison between MAB recommenders libraries
+
+EXPLICAR SIMPLIFICADAMENTE OS EXPERIMENTOS.
+
+COLOCAR A TABELA COM OS RESULTADOS EM MARKDOWN
 
 ## Usage
+
+EXPLICAR MELHOR CADA EXEMPLO
 
 ### Using a MAB Algorithm individually to generate arm scores
 
@@ -56,6 +69,27 @@ recommender.fit(contexts, decisions, rewards)
 recommender.recommend(np.array([[1, 1, 0], [0, 1, 1]]))
 ```
 
+## Available algorithms
+
+LISTAR OS ALGORITMOS DISPONIVEIS E REFERENCIAS
+
+## Contributing
+
+LINKAR ISSUES
+LINKAR PULL REQUESTS
+LINKAR README COM INSTRUÇÕES DE DESENVOLVIMENTO
+
+## License
+
+LINKAR LICENSA
+
+## Citation
+
+COLOCAR CÓDIGO PARA CITAÇÃO
+
+## References
+
+COLOCAR AS REFERÊNCIAS UTILIZADAS
 
 ## Documentation
 
