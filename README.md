@@ -100,9 +100,7 @@ Available baselines:
 
 ## Contributing
 
-LINKAR ISSUES
-LINKAR PULL REQUESTS
-LINKAR README COM INSTRUÇÕES DE DESENVOLVIMENTO
+Details on how to contribute to the GOBRec development can be viewed in the [contributing documentation](/CONTRIBUTING.md).
 
 ## License
 
