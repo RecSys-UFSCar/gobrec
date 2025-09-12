@@ -4,7 +4,6 @@ from utils.constants import TOP_K, SEED, L2_LAMBDA, LINUCB_ALPHA, LINGREEDY_EPSI
 from utils.BaseWrapper import BaseWrapper
 import pandas as pd
 import numpy as np
-from gobrec.Recommender import Recommender
 
 
 class BaseGobrecWrapper(BaseWrapper):
