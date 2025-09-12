@@ -20,9 +20,9 @@ More installation options can be found in the [documentation]().
 
 ## Performance comparison
 
-EXPLICAR SIMPLIFICADAMENTE OS EXPERIMENTOS.
+TODO: EXPLAIN EXPERIMENTS
 
-COLOCAR A TABELA COM OS RESULTADOS EM MARKDOWN
+TODO: RESULTS IN A MARKDOWN TABLE
 
 ## Usage
 
@@ -106,11 +106,11 @@ LINKAR README COM INSTRUÇÕES DE DESENVOLVIMENTO
 
 ## License
 
-LINKAR LICENSA
+GOBRec is licensed under the [MIT License](/LICENSE).
 
 ## Citation
 
-COLOCAR CÓDIGO PARA CITAÇÃO
+TODO: PUT CITATION BIBTEX
 
 ## References
 
