@@ -87,7 +87,16 @@ recommender.recommend(np.array([[1, 1, 0], [0, 1, 1]]))
 
 ## Available algorithms
 
-LISTAR OS ALGORITMOS DISPONIVEIS E REFERENCIAS
+Available linear CMABs:
+
+* [Lin](/gobrec/mabs/lin_mabs/lin.py) (only exploitation)
+* [LinUCB](/gobrec/mabs/lin_mabs/lin_ucb.py) [1]
+* [LinTS](/gobrec/mabs/lin_mabs/lin_ts.py) [2]
+* [LinGreedy](/gobrec/mabs/lin_mabs/lin_greedy.py) [3]
+
+Available baselines:
+
+* [Random](/gobrec/mabs/random_mab.py)
 
 ## Contributing
 
@@ -105,4 +114,17 @@ COLOCAR CÓDIGO PARA CITAÇÃO
 
 ## References
 
-COLOCAR AS REFERÊNCIAS UTILIZADAS
+[1] Lihong Li, Wei Chu, John Langford, and Robert E. Schapire. A contextual-bandit 
+    approach to personalized news article recommendation. In Proceedings of the 19th 
+    International Conference on World Wide Web, WWW'09, pages 661-670, New York, NY, 
+    USA, 2010. Association for Computing Machinery. doi: 10.1145/1772690.1772758.
+
+[2] Shipra Agrawal and Navin Goyal. Thompson sampling for contextual bandits with 
+    linear payoffs. In Proceedings of the 30th International Conference on Machine 
+    Learning, ICML'13, pages 1220-1228, New York, NY, USA, 2013. JMLR.org. doi: 
+    10.48550/arXiv.1209.3352.
+
+[3] John Langford and Tong Zhang. The epoch-greedy algorithm for contextual multi-armed
+     bandits. In Proceedings of the 20th International Conference on Neural Information Pro-
+     cessing Systems, NIPS'07, pages 817-824, Red Hook, NY, USA, 2007. Curran Associates
+     Inc. doi: 10.5555/2981562.2981665.
