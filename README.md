@@ -8,9 +8,15 @@ The GOBRec documentation is available at: [https://recsys-ufscar.github.io/gobre
 
 ## Installation
 
-INSTALACAO COM O PIP INSTALL.
-FALAR SOBRE CUDA E TORCH PARA PODER USAR A OTIMIZACAO DE GPU
-LINK PARA MAIS DETALHES NA DOCUMENTACAO
+GOBRec is available on [PyPI](https://pypi.org/project/gobrec/) and can be installed by the command below:
+
+```
+pip install gobrec
+```
+
+The recommended Python version to use is 3.8.20 (but newer versions should work too). For using GPU optimization, it is important to install PyTorch with CUDA implementation. More details on installing PyTorch with CUDA can be found in the [PyTorch documentation](https://pytorch.org/get-started/locally/). The recommended PyTorch version to use is 2.4.1.
+
+More installation options can be found in the [documentation]().
 
 ## Performance comparison
 
