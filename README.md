@@ -1,12 +1,18 @@
 # GOBRec: GPU Optimized Bandits Recommender
 
+GOBRec is a Python library with optimized implementation of contextual multi-armed bandits (CMABs) for recommender systems. The library has a simple API where you can use the CMABs algorithms to generate items (arms) expectations, using it for other tasks than recommendations. You can also use any of the implemented CMABs inside the Recommender to efficiently generate top-K recommendations.
+
+The main contribuition of GOBRec is its efficient implementation. With the vectorized code, using only CPU, our implementation was up to X times faster than other libraries. Using the GPU optimization, our library was able to obtain a speed gain of Y times. More details about these comparisions can be found in the [ ["performance comparision" section](#Performance_comparison) or in our [paper]().
+
+The GOBRec documentation is available at: [https://recsys-ufscar.github.io/gobrec](https://recsys-ufscar.github.io/gobrec/).
+
 ## Installation
 
 INSTALACAO COM O PIP INSTALL.
 FALAR SOBRE CUDA E TORCH PARA PODER USAR A OTIMIZACAO DE GPU
 LINK PARA MAIS DETALHES NA DOCUMENTACAO
 
-## Performance comparison between MAB recommenders libraries
+## Performance comparison
 
 EXPLICAR SIMPLIFICADAMENTE OS EXPERIMENTOS.
 
@@ -90,13 +96,3 @@ COLOCAR CÓDIGO PARA CITAÇÃO
 ## References
 
 COLOCAR AS REFERÊNCIAS UTILIZADAS
-
-## Documentation
-
-```bash
-sphinx-apidoc -o docsrc ./gobrec
-```
-
-```bash
-make html
-```
