@@ -49,13 +49,13 @@ class LinGreedy(Lin):
     >>> rewards = np.array([10, 0 , 1 , 
     ...                     1 , 10, 0 ,
     ...                     0 , 1 , 10])
-    >>> lin_mab = LinGreedy(seed=42, epsilon=1)
-    >>> lin_mab.fit(contexts, decisions, rewards)
-    >>> lin_mab.predict(np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]))
+    >>> lin_greedy_mab = LinGreedy(seed=42, epsilon=1)
+    >>> lin_greedy_mab.fit(contexts, decisions, rewards)
+    >>> lin_greedy_mab.predict(np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]))
     tensor([[0.6974, 0.0942, 0.9756],
             [0.7611, 0.7861, 0.1281],
             [0.4504, 0.3708, 0.9268]], dtype=torch.float64)
-    >>> lin_mab.predict(np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]))
+    >>> lin_greedy_mab.predict(np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]))
     tensor([[0.2272, 0.5546, 0.0638],
             [0.8276, 0.6317, 0.7581],
             [0.3545, 0.9707, 0.8931]], dtype=torch.float64)
@@ -73,13 +73,13 @@ class LinGreedy(Lin):
     >>> rewards = np.array([10, 0 , 1 , 
     ...                     1 , 10, 0 ,
     ...                     0 , 1 , 10])
-    >>> lin_mab = LinGreedy(seed=42, epsilon=0)
-    >>> lin_mab.fit(contexts, decisions, rewards)
-    >>> lin_mab.predict(np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]))
+    >>> lin_greedy_mab = LinGreedy(seed=42, epsilon=0)
+    >>> lin_greedy_mab.fit(contexts, decisions, rewards)
+    >>> lin_greedy_mab.predict(np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]))
     tensor([[5.0000, 0.5000, 0.0000],
             [0.0000, 5.0000, 0.5000],
             [0.5000, 0.0000, 5.0000]], dtype=torch.float64)
-    >>> lin_mab.predict(np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]))
+    >>> lin_greedy_mab.predict(np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]))
     tensor([[5.0000, 0.5000, 0.0000],
             [0.0000, 5.0000, 0.5000],
             [0.5000, 0.0000, 5.0000]], dtype=torch.float64)
