@@ -26,9 +26,11 @@ COLOCAR A TABELA COM OS RESULTADOS EM MARKDOWN
 
 ## Usage
 
-EXPLICAR MELHOR CADA EXEMPLO
+This section shows two examples of how to use GOBRec. You can also use the available [Jupyter notebook](notebooks/usage_tutorial.ipynb) to reproduce the examples and verify the generated output.
 
-### Using a MAB Algorithm individually to generate arm scores
+### Using an MAB Algorithm individually to generate arm scores
+
+It is possible to generate item (arm) expectations by using an MAB Algorithm alone. That way it is possible to use these algorithms for others tasks than recommendation.
 
 ```python
 import numpy as np
@@ -52,7 +54,9 @@ bandit.fit(contexts, decisions, rewards)
 bandit.predict(np.array([[1, 1, 0], [0, 1, 1]]))
 ```
 
-### Using a MAB Algorithm to generate recommendations
+### Using an MAB Algorithm to generate recommendations
+
+It is possible to use an MAB Algorithm with the Recommender class to efficiently generate top-K recommendations.
 
 ```python
 import numpy as np
