@@ -3,3 +3,4 @@ sphinx-rtd-theme
 numpydoc
 ruff
 pydata-sphinx-theme
+myst-parser

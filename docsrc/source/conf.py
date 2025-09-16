@@ -19,6 +19,7 @@ release = '0.4.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
+    "myst_parser",
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
     "sphinx.ext.intersphinx",
@@ -43,14 +44,11 @@ exclude_patterns = []
 
 html_theme = "pydata_sphinx_theme"
 html_theme_options = {
-    "show_nav_level": 2,
-    "navbar_end": ["search-field.html", "navbar-icon-links.html"],
+    "navbar_start": ["navbar-logo"],
+    "navbar_center": ["navbar-nav"],
 }
 html_baseurl = "https://recsys-ufscar.github.io/gobrec/"
 html_static_path = ['_static']
-html_theme_options = {
-    "navigation_with_keys": True,
-}
 
 html_context = {
     "display_github": True,
