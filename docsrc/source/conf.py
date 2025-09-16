@@ -11,9 +11,10 @@ import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
 project = 'GOBRec'
-copyright = '2025, Gregorio'
+copyright = '2025, LaSID'
 author = 'Gregorio'
 release = '0.4.0'
+html_title = "GOBRec"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
