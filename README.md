@@ -123,6 +123,6 @@ TODO: PUT CITATION BIBTEX
     10.48550/arXiv.1209.3352.
 
 [3] John Langford and Tong Zhang. The epoch-greedy algorithm for contextual multi-armed
-     bandits. In Proceedings of the 20th International Conference on Neural Information Pro-
-     cessing Systems, NIPS'07, pages 817-824, Red Hook, NY, USA, 2007. Curran Associates
-     Inc. doi: 10.5555/2981562.2981665.
+     bandits. In Proceedings of the 20th International Conference on Neural Information 
+     Processing Systems, NIPS'07, pages 817-824, Red Hook, NY, USA, 2007. Curran 
+     Associates Inc. doi: 10.5555/2981562.2981665.
