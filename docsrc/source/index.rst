@@ -16,6 +16,5 @@ Documentation pages
    installation
    quick start
    benchmark
-   public API
    contributing
-   resources
+   public API
