@@ -18,12 +18,6 @@ The recommended Python version to use is 3.8.20 (but newer versions should work 
 
 More installation options can be found in the [documentation]().
 
-## Performance comparison
-
-TODO: EXPLAIN EXPERIMENTS
-
-TODO: RESULTS IN A MARKDOWN TABLE
-
 ## Usage
 
 This section shows two examples of how to use GOBRec. You can also use the available [Jupyter notebook](notebooks/usage_tutorial.ipynb) to reproduce the examples and verify the generated output.
@@ -84,6 +78,27 @@ recommender.fit(contexts, decisions, rewards)
 # Recommend top_k items given a batch of contexts
 recommender.recommend(np.array([[1, 1, 0], [0, 1, 1]]))
 ```
+
+## Performance comparison
+
+| Algorithm      | Time (m)       | Opt. mab2rec | Opt. iRec | Opt. CPU |
+|----------------|----------------|--------------|-----------|----------|
+| **MovieLens 100k** |                |              |           |          |
+| mab2rec        | 0.8 (± 0.00)   |            |         |        |
+| iRec           | 10.0 (± 0.02)  |            |        |       |
+| gobrec CPU     | 0.01 (± 0.00)  | 106.7×       | 1308.1×   |       |
+| gobrec GPU     | 0.00 (± 0.00)  | 192.1×       | 2354.7×   | 1.8×     |
+| **MovieLens 1M** |                |              |           |          |
+| mab2rec        | 18.0 (± 0.15)  |           |       |        |
+| iRec           | 10.0 (± 0.02)  |            |         |        |
+| gobrec CPU     | 0.11 (± 0.00)  | 168.6×       | 93.4×     |        |
+| gobrec GPU     | 0.06 (± 0.00)  | 322.4×       | 178.7×    | 1.9×     |
+| **MovieLens 10M** |                |              |           |          |
+| mab2rec        | 406.5 (± 0.35) |            |         |        |
+| iRec           | 10.0 (± 0.02)  |            |         |        |
+| gobrec CPU     | 2.05 (± 0.02)  | 198.1×       | 4.9×      |       |
+| gobrec GPU     | 0.85 (± 0.00)  | 476.3×       | 11.7×     | 2.4×     |
+
 
 ## Available algorithms
 
