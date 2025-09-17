@@ -37,6 +37,7 @@ numpydoc_class_members_toctree = False
 
 templates_path = ['_templates']
 exclude_patterns = []
+html_show_sourcelink = False
 
 
 
