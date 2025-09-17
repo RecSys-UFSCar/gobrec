@@ -1,7 +1,9 @@
 Public API
-======
+==========
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
+   :titlesonly:
 
-   gobrec
+   public_api/recommender
+   public_api/mabs/index
